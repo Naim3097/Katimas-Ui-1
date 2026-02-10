@@ -6,7 +6,7 @@
     <title>Katimas Group — Empowering Communities, Transforming Lives</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -52,35 +52,38 @@
         /* ===== NAV ===== */
         .nav {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
-            padding: 1.5rem 0;
-        }
-        .nav.scrolled {
-            background: rgba(255,255,255,0.97);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 1px 0 rgba(0,0,0,0.06);
-            padding: 1rem 0;
+            background: #fff; padding: 1.5rem 0;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.03);
         }
         .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-        .nav-logo {
-            font-family: 'Inter', sans-serif;
-            font-weight: 700; font-size: 1.35rem; letter-spacing: 0.12em;
-            color: var(--blue); text-transform: uppercase; cursor: pointer;
+        
+        .nav-logo-wrap {
+            display: flex; align-items: center; gap: 0.5rem; cursor: pointer;
         }
-        .nav-logo span { color: var(--gold); }
-        .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+        .nav-logo-box {
+            width: 44px; height: 44px; 
+            border: 2px solid var(--blue); border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nav-logo-k {
+            font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.6rem;
+            color: var(--blue); line-height: 1; font-style: italic;
+        }
+
+        .nav-links { display: flex; align-items: center; gap: 3rem; margin-left: auto; margin-right: auto; }
         .nav-links a {
-            font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
-            text-transform: uppercase; color: var(--charcoal); cursor: pointer;
-            transition: color var(--transition); position: relative;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -4px; left: 0; width: 0;
-            height: 1.5px; background: var(--gold); transition: width var(--transition);
+            font-size: 1rem; font-weight: 400; color: #111; 
+            cursor: pointer; transition: color 0.3s; font-family: 'Inter', sans-serif;
         }
         .nav-links a:hover { color: var(--blue); }
-        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-        .nav-links a.active { color: var(--blue); }
+
+        .btn-contact {
+            background: var(--blue); color: #fff; padding: 0.75rem 2rem;
+            font-size: 0.95rem; font-weight: 600; border-radius: 4px; border: none;
+            transition: background 0.3s; font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+        .btn-contact:hover { background: var(--blue-light); }
 
         .mobile-toggle {
             display: none; width: 28px; height: 20px; position: relative;
@@ -101,33 +104,74 @@
         }
         .mobile-menu.open { display: flex; }
         .mobile-menu a {
-            font-size: 1.4rem; font-weight: 500; letter-spacing: 0.08em;
-            text-transform: uppercase; color: var(--blue); cursor: pointer;
+            font-size: 1.4rem; font-weight: 500; color: var(--blue); cursor: pointer;
         }
-        .mobile-menu a:hover { color: var(--gold); }
+
+        @media (max-width: 1100px) {
+            .nav-links { gap: 1.5rem; }
+        }
 
         @media (max-width: 960px) {
             .nav-links { display: none; }
             .mobile-toggle { display: flex; }
+            .btn-contact { display: none; } 
         }
 
         /* ===== HERO ===== */
-        .hero {
-            position: relative; min-height: 100vh; display: flex; align-items: flex-end;
-            overflow: hidden; background: var(--blue);
+        .hero-section {
+            padding: 100px 2rem 2rem 2rem;
+            background: #fff;
+            display: flex; justify-content: center;
         }
-        .hero-media { position: absolute; inset: 0; z-index: 1; }
-        .hero-media img {
-            width: 100%; height: 100%; object-fit: cover;
-            filter: brightness(0.42); transition: transform 10s ease-out;
+        .hero-card {
+            width: 100%; max-width: 1400px;
+            border-radius: 40px; 
+            position: relative; overflow: hidden;
+            min-height: 85vh; /* Tall hero */
+            display: flex; align-items: center;
         }
-        .hero:hover .hero-media img { transform: scale(1.04); }
+        .hero-bg {
+            position: absolute; inset: 0; z-index: 1;
+        }
+        .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+        
         .hero-overlay {
             position: absolute; inset: 0; z-index: 2;
-            background: linear-gradient(0deg, rgba(15,42,68,0.88) 0%, rgba(15,42,68,0.25) 55%, transparent 100%);
+            background: linear-gradient(to right, rgba(10,30,55,0.95) 0%, rgba(10,30,55,0.8) 35%, rgba(10,30,55,0.2) 100%);
         }
-        .hero-content {
-            position: relative; z-index: 3; padding: 0 0 5rem; width: 100%;
+        
+        .hero-body {
+            position: relative; z-index: 3;
+            padding: 4rem 6rem;
+            max-width: 900px;
+        }
+        
+        .hero-headline {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 600; line-height: 1.1;
+            color: #fff; margin-bottom: 1.5rem;
+        }
+        .hero-headline span.light { color: #A5C9EA; display: inline; }
+        .hero-headline span.bold { color: #fff; font-weight: 700; display: inline; }
+        
+        .hero-desc {
+            color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.6;
+            margin-bottom: 2.5rem; max-width: 600px;
+        }
+        
+        .btn-discover {
+            background: #fff; color: var(--blue);
+            padding: 1rem 2.5rem; font-size: 1rem; font-weight: 700;
+            border-radius: 6px; display: inline-block; cursor: pointer;
+            transition: background 0.3s; font-family: 'Inter', sans-serif;
+        }
+        .btn-discover:hover { background: #f0f0f0; }
+        
+        @media (max-width: 768px) {
+            .hero-body { padding: 2rem; }
+            .hero-card { border-radius: 20px; min-height: 60vh; }
+            .hero-section { padding: 80px 1rem 1rem 1rem; }
         }
         .hero-tag {
             display: inline-block; font-size: 0.7rem; font-weight: 600;
@@ -186,8 +230,9 @@
         /* ===== SECTION UTILITIES ===== */
         .section { padding: clamp(4rem, 8vw, 7rem) 0; }
         .section-tag {
-            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em;
-            text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: block;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.4em;
+            text-transform: uppercase; color: #2B2E34; margin-bottom: 0.5rem; display: block;
+            font-family: 'Inter', sans-serif;
         }
         .section-title {
             font-family: 'Playfair Display', serif;
@@ -198,6 +243,505 @@
             font-size: 1.02rem; line-height: 1.8; color: var(--grey-500); max-width: 600px;
         }
         .divider { width: 48px; height: 2px; background: var(--gold); margin: 1.25rem 0; }
+
+        /* ===== NEW ABOUT SECTION ===== */
+        .section-about {
+            padding: 8rem 0;
+            background: #fff;
+        }
+        .about-header {
+            text-align: center; margin-bottom: 5rem;
+        }
+        .about-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700; color: #3b6e8f; /* Approximate blue from image */
+            color: #4A7C9D; /* Tweaking to match better */
+            color: #2D6A9F; 
+            font-family: 'Inter', sans-serif;
+            margin-top: 1rem;
+        }
+        .about-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+        .about-img {
+            border-radius: 40px;
+            overflow: hidden;
+            border-bottom-right-radius: 0; /* Just a guess based on some styles, but mockup looks mostly rounded. */
+            border-radius: 30px; 
+            height: 400px;
+        }
+        .about-img img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .about-text p {
+            font-size: 1.05rem; line-height: 1.6; color: #555;
+            margin-bottom: 1.5rem;
+        }
+        .btn-learn {
+            display: inline-block;
+            background: #fff;
+            border: 1px solid #9bbfd9;
+            color: #1a4f75;
+            padding: 1rem 2.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            min-width: 180px; text-align: center;
+        }
+        .btn-learn:hover {
+            border-color: #1a4f75;
+            background: #f4f8fb;
+        }
+
+        /* ===== STATS ROW ===== */
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0 2rem;
+        }
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10%; 
+            height: 80%;
+            width: 1px;
+            background: #e0e0e0;
+        }
+        .stat-val {
+            font-size: 3rem; font-weight: 600; color: #222;
+            margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;
+        }
+        .stat-lbl {
+            font-size: 0.9rem; color: #666; font-weight: 400;
+        }
+        
+        @media (max-width: 900px) {
+            .about-content { grid-template-columns: 1fr; }
+            .stats-row { flex-wrap: wrap; row-gap: 3rem; }
+            .stat-item { flex: 1 1 50%; }
+            .stat-item:nth-child(2)::after { display: none; }
+        }
+
+        /* ===== WHAT WE DO SECTION ===== */
+        .section-what {
+            padding: 6rem 0;
+            background: #fff; /* Ensure white bg */
+            text-align: center;
+        }
+        .what-header { margin-bottom: 4rem; }
+        .what-tag {
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.4em;
+            text-transform: uppercase; color: #555; margin-bottom: 0.5rem;
+            display: block; font-family: 'Inter', sans-serif;
+        }
+        .what-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 700; color: #4A7C9D; /* Matching the blue title */
+            margin-bottom: 0.8rem;
+            max-width: 800px; margin-left: auto; margin-right: auto;
+            line-height: 1.2;
+        }
+        .what-sub {
+            color: #777; font-size: 1rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            padding: 0 1rem;
+        }
+        .card-item {
+            position: relative;
+            height: 480px; 
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            text-align: left;
+            transition: transform 0.3s;
+        }
+        .card-item:hover {
+            transform: translateY(-5px);
+        }
+        .card-bg {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s;
+        }
+        .card-item:hover .card-bg { transform: scale(1.05); }
+        .card-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(10,30,55,0.4) 50%, rgba(10,30,55,0.9) 100%);
+        }
+        .card-content {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 2rem;
+            z-index: 2;
+        }
+        .card-title {
+            color: #fff; font-family: 'Inter', sans-serif;
+            font-size: 1.5rem; font-weight: 600; line-height: 1.25;
+            margin-bottom: 0.5rem;
+        }
+        .card-desc {
+            color: rgba(255,255,255,0.8); font-size: 0.85rem; line-height: 1.5;
+            margin-bottom: 1rem; opacity: 0; transform: translateY(10px);
+            transition: all 0.3s; height: 0; overflow: hidden; /* Hide by default like valid accordion/hover */
+            /* Actually, looking at image, desc is visible on the first card, others just title? 
+               Wait, the image shows "Real Estate" has desc + "Explore". Others just Title. 
+               Lets maintain consistency or hover effect. 
+               The prompt says "Exact design styles". 
+               In the image:
+               Card 1: Title + Desc + Explore link (Yellow).
+               Card 2,3,4: Title only (at bottom).
+               This suggests a hover state or active state. I'll make it hover based.
+            */ 
+        }
+        
+        .card-item:hover .card-desc {
+            opacity: 1; transform: translateY(0); height: auto; margin-bottom: 1rem;
+        }
+        /* Let's force the first one to be 'active' style if desired, but hover is better for interactivity */
+        
+        .card-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: #F8C301; /* Yellow/Gold */
+            font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.05em; cursor: pointer;
+        }
+        .card-link svg { width: 14px; height: 14px; }
+
+
+        /* ===== COMMITMENT SECTION ===== */
+        .commit-section {
+            position: relative;
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #8EB8D8 0%, #5D94C3 50%, #3A6A91 100%);
+            /* Using image as reference - it's a soft blue gradient */
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=60&auto=format') center/cover no-repeat; 
+            /* Let's use a solid gradient overlay on an image to get that texture in bottom right */
+            overflow: hidden;
+            text-align: center; color: #fff;
+        }
+        .commit-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(135, 187, 224, 0.95) 0%, rgba(68, 126, 171, 0.92) 100%);
+        }
+        .commit-content {
+            position: relative; z-index: 2;
+            max-width: 900px; margin: 0 auto;
+        }
+        .commit-tag {
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4em;
+            text-transform: uppercase; color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem; display: block;
+        }
+        .commit-quote {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600; line-height: 1.4;
+            margin-bottom: 4rem;
+        }
+        .commit-logo {
+            width: 70px; height: 70px; 
+            margin: 0 auto;
+            border: 3px solid #fff; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .commit-k {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800; font-size: 2.5rem; color: #fff;
+            line-height: 1; font-style: italic;
+        }
+
+        @media (max-width: 1024px) {
+            .cards-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+        }
+        @media (max-width: 600px) {
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== CSR JOURNEY ===== */
+        .csr-section {
+            background: #fff;
+            padding: 8rem 0;
+            display: flex; justify-content: center;
+        }
+        .csr-container {
+            width: 100%; max-width: 1400px;
+            margin: 0 2rem;
+            display: grid; grid-template-columns: 1fr 1fr;
+            border-radius: 40px; overflow: hidden;
+            background: #355E82; /* Muted blue from image */
+        }
+        .csr-left {
+            padding: 5rem 6rem;
+            display: flex; flex-direction: column; justify-content: center;
+            color: #fff;
+            background: #355E82;
+        }
+        .csr-tag {
+            font-size: 0.75rem; letter-spacing: 0.5em; text-transform: uppercase;
+            font-weight: 700; margin-bottom: 1.5rem; display: block;
+            color: rgba(255,255,255,0.8); font-family: 'Inter', sans-serif;
+        }
+        .csr-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 700;
+            margin-bottom: 2rem; line-height: 1.1;
+        }
+        .csr-desc {
+            font-size: 1rem; line-height: 1.6; color: rgba(255,255,255,0.9);
+            margin-bottom: 1.5rem; max-width: 480px;
+        }
+        .btn-learn-csr {
+            background: #fff; color: #355E82;
+            padding: 1rem 2.5rem; border-radius: 6px; font-weight: 700;
+            display: inline-block; cursor: pointer; border: none;
+            transition: background 0.3s; margin-top: 2rem; align-self: flex-start;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-learn-csr:hover { background: #f0f0f0; }
+
+        .csr-right {
+            position: relative; height: 100%; min-height: 600px;
+        }
+        .csr-right img {
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+        }
+
+        @media (max-width: 1024px) {
+            .csr-container { grid-template-columns: 1fr; border-radius: 20px; margin: 0 1rem; }
+            .csr-left { padding: 4rem 2rem; min-height: auto; }
+            .csr-right { min-height: 400px; }
+        }
+
+        /* ===== UPDATES (NEWS) SECTION ===== */
+        .section-news {
+            padding: 8rem 0;
+            background: #F8F9FA;
+        }
+        .news-header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;
+        }
+        .news-tag {
+            font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase;
+            font-weight: 700; color: #888; margin-bottom: 0.5rem;
+            display: block; font-family: 'Inter', sans-serif;
+        }
+        .news-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 700; color: #0F2A44;
+            line-height: 1.1;
+        }
+        .btn-view-all {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            border: 1px solid #0F2A44; color: #0F2A44;
+            border-radius: 6px; font-weight: 600; font-size: 0.9rem;
+            cursor: pointer; transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-view-all:hover {
+            background: #0F2A44; color: #fff;
+        }
+
+        .news-grid { 
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; 
+        }
+        .news-card {
+            background: #fff;
+            border-radius: 16px; overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0,0,0,0.04);
+            display: flex; flex-direction: column;
+            height: 100%;
+        }
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+        }
+
+        /* ===== JOIN / CTA SECTION ===== */
+        .join-section {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center;
+        }
+        .join-bg {
+            position: absolute; inset: 0; z-index: 1;
+        }
+        .join-bg img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .join-overlay {
+            position: absolute; inset: 0; z-index: 2;
+             background: linear-gradient(to bottom, rgba(230,245,255,0.7) 0%, rgba(60,130,180,0.1) 40%, rgba(20,50,80,0.9) 100%);
+        }
+
+        .join-content-top {
+            position: absolute; top: 10%; left: 0; width: 100%;
+            z-index: 3;
+        }
+
+        .join-tag {
+            font-size: 0.85rem; letter-spacing: 0.6em; text-transform: uppercase;
+            font-weight: 700; color: #333; margin-bottom: 0.5rem;
+            display: inline-block; font-family: 'Inter', sans-serif;
+        }
+        .join-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-weight: 600; color: #356E93; /* Blue text */
+            line-height: 1.1;
+        }
+
+        .join-content-bottom {
+            position: absolute; bottom: 12%; left: 0; width: 100%;
+            z-index: 3; padding: 0 2rem;
+        }
+        .join-desc {
+            color: rgba(255,255,255,0.95); font-size: 1.1rem; 
+            max-width: 700px; margin: 0 auto 2.5rem; line-height: 1.6;
+        }
+        .btn-discover-join {
+            background: #fff; color: #356E93;
+            padding: 1rem 3rem; font-size: 1.1rem; font-weight: 700;
+            border-radius: 6px; border: none; cursor: pointer;
+            transition: transform 0.3s;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .btn-discover-join:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+
+        /* ===== FOOTER ===== */
+        .footer-new {
+            background: #0E1B2B; /* Dark Blue */
+            color: #fff;
+            padding: 5rem 0 2rem;
+            font-family: 'Inter', sans-serif;
+        }
+        .footer-grid {
+            display: grid; 
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem; margin-bottom: 5rem;
+        }
+        .footer-brand h2 {
+            font-size: 1.25rem; font-weight: 800; letter-spacing: 0.1em;
+            text-transform: uppercase; margin-bottom: 1.5rem; color: #fff;
+        }
+        .footer-brand p {
+            color: #8A9BB0; font-size: 0.9rem; line-height: 1.6; max-width: 300px; margin-bottom: 2rem;
+        }
+        .footer-socials a {
+            display: inline-flex; width: 32px; height: 32px;
+            border: 1px solid #2C3E50; border-radius: 50%;
+            align-items: center; justify-content: center;
+            color: #8A9BB0; margin-right: 0.8rem; transition: all 0.3s;
+        }
+        .footer-socials a:hover { background: #fff; color: #0E1B2B; border-color: #fff; }
+
+        .footer-col h4 {
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+            text-transform: uppercase; color: #D4AF37; /* Gold/Yellow */
+            margin-bottom: 1.5rem;
+        }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a {
+            color: #8A9BB0; font-size: 0.9rem; transition: color 0.3s;
+            text-decoration: none;
+        }
+        .footer-links a:hover { color: #fff; }
+
+        .footer-contact-item {
+            display: flex; gap: 0.8rem; margin-bottom: 1rem; align-items: flex-start;
+        }
+        .footer-contact-item svg {
+            width: 16px; height: 16px; stroke: #D4AF37; flex-shrink: 0; margin-top: 3px;
+        }
+        .footer-contact-item span {
+            color: #8A9BB0; font-size: 0.9rem; line-height: 1.5;
+        }
+
+        .footer-btm {
+            border-top: 1px solid #1E2D3F;
+            padding-top: 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: #516377;
+        }
+        .footer-btm-links a {
+            color: #516377; margin-left: 1.5rem; transition: color 0.3s;
+        }
+        .footer-btm-links a:hover { color: #8A9BB0; }
+
+        @media (max-width: 900px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .footer-btm { flex-direction: column; gap: 1rem; text-align: center; }
+            .footer-btm-links a { margin: 0 0.8rem; }
+        }
+        .news-thumb {
+            position: relative; height: 240px; overflow: hidden;
+        }
+        .news-thumb img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s;
+        }
+        .news-card:hover .news-thumb img { transform: scale(1.05); }
+        .news-date-badge {
+            position: absolute; top: 1rem; left: 1rem;
+            background: #fff; padding: 0.4rem 0.8rem;
+            border-radius: 4px; font-size: 0.75rem; font-weight: 700;
+            color: #0F2A44; text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .news-body {
+            padding: 2rem;
+            display: flex; flex-direction: column; flex-grow: 1;
+        }
+        .news-body h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.25rem; font-weight: 700; color: #0F2A44;
+            margin-bottom: 1rem; line-height: 1.4;
+        }
+        .news-body p {
+            font-size: 0.95rem; line-height: 1.6; color: #666;
+            margin-bottom: 1.5rem; flex-grow: 1;
+        }
+        .news-read {
+            font-size: 0.85rem; font-weight: 700; color: #355E82;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            transition: gap 0.3s;
+        }
+        .news-read svg { width: 14px; height: 14px; }
+        .news-card:hover .news-read { gap: 0.8rem; }
+
+        @media (max-width: 900px) {
+            .news-grid { grid-template-columns: 1fr; }
+        }
 
         /* ===== TWO COLUMN LAYOUT ===== */
         .split {
@@ -577,35 +1121,45 @@
 
         /* ===== NAVIGATION ===== */
         function Nav({ page, go }) {
-            const [scrolled, setScrolled] = useState(false);
             const [mob, setMob] = useState(false);
-            useEffect(() => {
-                const fn = () => setScrolled(window.scrollY > 50);
-                window.addEventListener('scroll', fn);
-                return () => window.removeEventListener('scroll', fn);
-            }, []);
+            
             const links = [
-                { id:'home', label:'Home' },{ id:'about', label:'About' },
-                { id:'businesses', label:'Businesses' },{ id:'csr', label:'CSR' },
-                { id:'career', label:'Career' },{ id:'media', label:'Media' },
-                { id:'contact', label:'Contact' },
+                { id:'home', label:'Home' },
+                { id:'about', label:'About' },
+                { id:'businesses', label:'Business' },
+                { id:'csr', label:'CSR' },
+                { id:'career', label:'Career' },
+                { id:'media', label:'Media' }
             ];
-            const nav = id => { go(id); setMob(false); window.scrollTo({top:0, behavior:'smooth'}); };
+            
+            const navTo = (id) => { go(id); setMob(false); window.scrollTo({top:0, behavior:'smooth'}); };
+
             return (
                 <>
-                    <nav className={`nav ${scrolled || page !== 'home' ? 'scrolled' : ''}`}>
+                    <nav className="nav">
                         <div className="container nav-inner">
-                            <span className="nav-logo" onClick={() => nav('home')}>KATIMAS<span>.</span></span>
-                            <div className="nav-links">
-                                {links.map(l => <a key={l.id} className={page===l.id?'active':''} onClick={() => nav(l.id)}>{l.label}</a>)}
+                            <div className="nav-logo-wrap" onClick={() => navTo('home')}>
+                                <div className="nav-logo-box">
+                                    <span className="nav-logo-k">K</span>
+                                </div>
                             </div>
+                            
+                            <div className="nav-links">
+                                {links.map(l => (
+                                    <a key={l.id} onClick={() => navTo(l.id)}>{l.label}</a>
+                                ))}
+                            </div>
+                            
+                            <button className="btn-contact" onClick={() => navTo('contact')}>Contact Us</button>
+
                             <div className={`mobile-toggle ${mob?'open':''}`} onClick={() => setMob(!mob)}>
                                 <span/><span/><span/>
                             </div>
                         </div>
                     </nav>
                     <div className={`mobile-menu ${mob?'open':''}`}>
-                        {links.map(l => <a key={l.id} onClick={() => nav(l.id)}>{l.label}</a>)}
+                        {links.map(l => <a key={l.id} onClick={() => navTo(l.id)}>{l.label}</a>)}
+                         <a onClick={() => navTo('contact')}>Contact Us</a>
                     </div>
                 </>
             );
@@ -616,131 +1170,160 @@
             useReveal();
             return (
                 <div>
-                    <section className="hero">
-                        <div className="hero-media"><img src={IMG.hero} alt="Sarawak"/></div>
-                        <div className="hero-overlay"/>
-                        <div className="hero-content container">
-                            <span className="hero-tag">Since 1996 · Kuching, Sarawak</span>
-                            <h1>Empowering Communities, Transforming Lives.</h1>
-                            <p className="hero-sub">A diversified Malaysian enterprise delivering meaningful impact through real estate, land banking, financial technology, and business solutions.</p>
-                            <div className="hero-actions">
-                                <a className="btn btn-primary" onClick={() => go('about')}>Discover Katimas <Arrow/></a>
-                                <a className="btn btn-outline" onClick={() => go('contact')}>Contact Us</a>
+                    <section className="hero-section">
+                        <div className="hero-card">
+                            <div className="hero-bg"><img src={IMG.hero} alt="KL Cityscape"/></div>
+                            <div className="hero-overlay"/>
+                            <div className="hero-body">
+                                <h1 className="hero-headline">
+                                    <span className="light">Empowering Communities,</span><br/>
+                                    <span className="bold">Transforming Lives.</span>
+                                </h1>
+                                <p className="hero-desc">
+                                    A diversified Malaysian enterprise delivering meaningful impact through real estate, land banking, financial technology, and business solutions.
+                                </p>
+                                <a className="btn-discover" onClick={() => go('about')}>Discover Katimas</a>
                             </div>
                         </div>
                     </section>
 
-                    <section className="section" style={{background:'var(--white)'}}>
+                    <section className="section-about">
                         <div className="container">
-                            <div className="split">
-                                <div className="split-image reveal"><img src={IMG.about} alt="Katimas"/></div>
+                            <div className="about-header reveal">
+                                <span className="section-tag">WHO ARE WE</span>
+                                <h2 className="about-title">Inspire, Support, Empower</h2>
+                            </div>
+                            
+                            <div className="about-content reveal">
+                                <div className="about-img">
+                                    <img src={IMG.about} alt="About Katimas"/>
+                                </div>
+                                <div className="about-text">
+                                    <p>The birth of Katimas Group in 1996 was based on the ideal of delivering a meaningful impact to our community via the improvement of the quality of life of all ordinary Malaysians.</p>
+                                    <p>Today, we hold an extensive portfolio spanning real estate development, land banking, business management solutions, and financial technology — including a company recognized with Malaysia Digital (Pioneer Status).</p>
+                                    <button className="btn-learn" onClick={() => go('about')}>Learn More</button>
+                                </div>
+                            </div>
+
+                            <div className="stats-row reveal reveal-d2">
+                                <div className="stat-item">
+                                    <div className="stat-val">1996</div>
+                                    <div className="stat-lbl">Established</div>
+                                </div>
+                                <div className="stat-item">
+                                    <div className="stat-val">4</div>
+                                    <div className="stat-lbl">Core Industries</div>
+                                </div>
+                                <div className="stat-item">
+                                    <div className="stat-val">38%</div>
+                                    <div className="stat-lbl">of my Land in Sarawak</div>
+                                </div>
+                                <div className="stat-item">
+                                    <div className="stat-val">MY</div>
+                                    <div className="stat-lbl">Nationwide Presence</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="section-what">
+                        <div className="container">
+                            <div className="what-header reveal">
+                                <span className="what-tag">WHAT WE DO</span>
+                                <h2 className="what-title">To inspire, support and empower today's communities</h2>
+                                <p className="what-sub">So that we can all endeavour for a better tomorrow.</p>
+                            </div>
+                        </div>
+                        <div className="cards-grid container reveal">
+                            <div className="card-item" onClick={() => go('businesses')}>
+                                <img src={IMG.realestate} className="card-bg" alt="Real Estate"/>
+                                <div className="card-overlay"/>
+                                <div className="card-content">
+                                    <h3 className="card-title">Real Estate Development</h3>
+                                    <div className="card-desc">
+                                        <p style={{marginBottom:'0.5rem'}}>Creating sustainable living spaces and commercial developments that enhance community life.</p>
+                                        <span className="card-link">Explore <Arrow/></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card-item" onClick={() => go('businesses')}>
+                                <img src={IMG.landbank} className="card-bg" alt="Land Banking"/>
+                                <div className="card-overlay"/>
+                                <div className="card-content">
+                                    <h3 className="card-title">Land Banking</h3>
+                                    <div className="card-desc">
+                                        <p style={{marginBottom:'0.5rem'}}>Strategic acquisition of high-value land assets across key Sarawak economic corridors.</p>
+                                        <span className="card-link">Explore <Arrow/></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card-item" onClick={() => go('businesses')}>
+                                <img src={IMG.solutions} className="card-bg" alt="Business Solutions"/>
+                                <div className="card-overlay"/>
+                                <div className="card-content">
+                                    <h3 className="card-title">Business Management Solutions</h3>
+                                    <div className="card-desc">
+                                        <p style={{marginBottom:'0.5rem'}}>Comprehensive management and consultancy services for enterprise partners.</p>
+                                        <span className="card-link">Explore <Arrow/></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card-item" onClick={() => go('businesses')}>
+                                <img src={IMG.fintech} className="card-bg" alt="FinTech"/>
+                                <div className="card-overlay"/>
+                                <div className="card-content">
+                                    <h3 className="card-title">Financial Technology Solutions</h3>
+                                    <div className="card-desc">
+                                        <p style={{marginBottom:'0.5rem'}}>Next-generation digital financial infrastructure driving inclusion and efficiency.</p>
+                                        <span className="card-link">Explore <Arrow/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="commit-section">
+                        <div className="commit-overlay"/>
+                        <div className="commit-content reveal">
+                            <span className="commit-tag">OUR COMMITMENT</span>
+                            <h2 className="commit-quote">
+                                "We stand by our absolute commitment to drive our nation's development and to enrich lives for a better tomorrow."
+                            </h2>
+                            <div className="commit-logo">
+                                <span className="commit-k">K</span>
+                            </div>
+                        </div>
+                        {/* Subtle building overlay if needed, using simple css shapes or reuse img */}
+                        <img src={IMG.office} style={{position:'absolute', bottom:0, right:0, height:'60%', opacity:0.1, mixBlendMode:'overlay'}} alt="" />
+                    </section>
+
+                    <section className="csr-section">
+                        <div className="csr-container reveal">
+                            <div className="csr-left">
+                                <span className="csr-tag">SHAPING IMPACT</span>
+                                <h2 className="csr-title">Our CSR Journey</h2>
+                                <p className="csr-desc">At Katimas Group, our CSR initiative, Kasih by Katimas, embodies the spirit of compassion and care. "Kasih"—which means "love"—reflects our commitment to uplifting communities.</p>
+                                <p className="csr-desc">Discover how our commitment to corporate social responsibility has evolved from 2022 to 2025.</p>
+                                <button className="btn-learn-csr" onClick={() => go('csr')}>Learn More</button>
+                            </div>
+                            <div className="csr-right">
+                                <img src={IMG.csr} alt="Volunteers"/>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="section-news">
+                        <div className="container">
+                            <div className="news-header reveal">
                                 <div>
-                                    <span className="section-tag reveal">Who We Are</span>
-                                    <h2 className="section-title reveal reveal-d1">Inspire, Support, Empower</h2>
-                                    <div className="divider reveal reveal-d1"/>
-                                    <p className="section-desc reveal reveal-d2" style={{marginBottom:'1.25rem'}}>The birth of Katimas Group in 1996 was based on the ideal of delivering a meaningful impact to our community via the improvement of the quality of life of all ordinary Malaysians.</p>
-                                    <p className="section-desc reveal reveal-d3" style={{marginBottom:'2rem'}}>Today, we hold an extensive portfolio spanning real estate development, land banking, business management solutions, and financial technology — including a company recognized with Malaysia Digital (Pioneer Status).</p>
-                                    <a className="btn btn-dark-outline reveal reveal-d4" onClick={() => go('about')}>Learn More <Arrow/></a>
+                                    <span className="news-tag">LATEST UPDATES</span>
+                                    <h2 className="news-title">Press Releases</h2>
                                 </div>
+                                <button className="btn-view-all" onClick={() => go('media')}>
+                                    View All <Arrow/>
+                                </button>
                             </div>
-                        </div>
-                    </section>
-
-                    <section style={{background:'var(--white)', paddingBottom:'clamp(4rem, 8vw, 7rem)'}}>
-                        <div className="container">
-                            <div className="stats reveal">
-                                <div className="stat"><div className="stat-num">1996</div><div className="stat-label">Established</div></div>
-                                <div className="stat"><div className="stat-num">4</div><div className="stat-label">Core Industries</div></div>
-                                <div className="stat"><div className="stat-num">38%</div><div className="stat-label">of MY Land in Sarawak</div></div>
-                                <div className="stat"><div className="stat-num">MY</div><div className="stat-label">Nationwide Presence</div></div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section style={{background:'var(--bg)'}}>
-                        <div className="container" style={{paddingTop:'clamp(4rem, 8vw, 7rem)', paddingBottom:'2rem', textAlign:'center'}}>
-                            <span className="section-tag reveal">What We Do</span>
-                            <h2 className="section-title reveal reveal-d1" style={{margin:'0 auto 1rem'}}>To inspire, support and empower today's communities</h2>
-                            <p className="section-desc reveal reveal-d2" style={{margin:'0 auto 3rem', maxWidth:'620px'}}>So that we can all endeavour for a better tomorrow.</p>
-                        </div>
-                        <div className="biz-grid reveal">
-                            <div className="biz-card" onClick={() => go('businesses')}>
-                                <img src={IMG.realestate} alt="Real Estate"/>
-                                <div className="biz-card-ov"/>
-                                <div className="biz-card-body">
-                                    <div className="biz-card-icon"><IcoBuilding/></div>
-                                    <h3>Real Estate Development</h3>
-                                    <p>Creating sustainable living spaces and commercial developments that enhance community life.</p>
-                                    <span className="biz-link">Explore <Arrow/></span>
-                                </div>
-                            </div>
-                            <div className="biz-card" onClick={() => go('businesses')}>
-                                <img src={IMG.landbank} alt="Land Banking"/>
-                                <div className="biz-card-ov"/>
-                                <div className="biz-card-body">
-                                    <div className="biz-card-icon"><IcoLayers/></div>
-                                    <h3>Land Banking</h3>
-                                    <p>Strategic acquisition of high-value land assets across key Sarawak economic corridors.</p>
-                                    <span className="biz-link">Explore <Arrow/></span>
-                                </div>
-                            </div>
-                            <div className="biz-card" onClick={() => go('businesses')}>
-                                <img src={IMG.solutions} alt="Business Solutions"/>
-                                <div className="biz-card-ov"/>
-                                <div className="biz-card-body">
-                                    <div className="biz-card-icon"><IcoBriefcase/></div>
-                                    <h3>Business Management Solutions</h3>
-                                    <p>Comprehensive management and consultancy services for enterprise partners.</p>
-                                    <span className="biz-link">Explore <Arrow/></span>
-                                </div>
-                            </div>
-                            <div className="biz-card" onClick={() => go('businesses')}>
-                                <img src={IMG.fintech} alt="FinTech"/>
-                                <div className="biz-card-ov"/>
-                                <div className="biz-card-body">
-                                    <div className="biz-card-icon"><IcoMonitor/></div>
-                                    <h3>Financial Technology Solutions</h3>
-                                    <p>Next-generation digital financial infrastructure driving inclusion and efficiency.</p>
-                                    <span className="biz-link">Explore <Arrow/></span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section className="quote-section">
-                        <div className="quote-bg"><img src={IMG.vision} alt=""/></div>
-                        <div className="container quote-content reveal">
-                            <span className="section-tag" style={{color:'var(--gold)'}}>Our Commitment</span>
-                            <blockquote>"We stand by our absolute commitment to drive our nation's development and to enrich lives for a better tomorrow."</blockquote>
-                            <cite>Katimas Group</cite>
-                        </div>
-                    </section>
-
-                    <section className="section" style={{background:'var(--white)'}}>
-                        <div className="container">
-                            <div className="split reverse">
-                                <div>
-                                    <span className="section-tag reveal">Shaping Impact</span>
-                                    <h2 className="section-title reveal reveal-d1">Our CSR Journey</h2>
-                                    <div className="divider reveal reveal-d1"/>
-                                    <p className="section-desc reveal reveal-d2" style={{marginBottom:'1.25rem'}}>At Katimas Group, our CSR initiative, <strong>Kasih by Katimas</strong>, embodies the spirit of compassion and care. "Kasih"—which means "love"—reflects our commitment to uplifting communities.</p>
-                                    <p className="section-desc reveal reveal-d3" style={{marginBottom:'2rem'}}>Discover how our commitment to corporate social responsibility has evolved from 2022 to 2025.</p>
-                                    <a className="btn btn-dark-outline reveal reveal-d4" onClick={() => go('csr')}>Read More <Arrow/></a>
-                                </div>
-                                <div className="split-image reveal"><img src={IMG.csr} alt="CSR"/></div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section className="section" style={{background:'var(--bg)'}}>
-                        <div className="container">
-                            <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'3rem', flexWrap:'wrap', gap:'1rem'}}>
-                                <div>
-                                    <span className="section-tag reveal">Latest Updates</span>
-                                    <h2 className="section-title reveal reveal-d1">Press Releases</h2>
-                                </div>
-                                <a className="btn btn-dark-outline reveal" onClick={() => go('media')}>View All <Arrow/></a>
-                            </div>
+                            
                             <div className="news-grid">
                                 {[
                                     {date:'Jan 8, 2025', title:'Randau Kasih by Kasih with Katimas CSR Campaign', desc:'KATIMAS Group recently hosted its Randau Kasih Corporate Social Responsibility initiative, bringing together community members...', img:IMG.news1},
@@ -748,21 +1331,34 @@
                                     {date:'Dec 7, 2023', title:'Serving Hope at The Lions Nursing Home Charity Food Fair', desc:'Katimas Group volunteers spent their Sunday morning at the Lions Nursing Home Charity Food Fair...', img:IMG.news3},
                                 ].map((a,i) => (
                                     <div key={i} className={`news-card reveal reveal-d${i+1}`}>
-                                        <div className="news-thumb"><img src={a.img} alt={a.title}/><span className="news-date">{a.date}</span></div>
-                                        <div className="news-body"><h4>{a.title}</h4><p>{a.desc}</p><span className="news-read">Read More <Arrow/></span></div>
+                                        <div className="news-thumb">
+                                            <img src={a.img} alt={a.title}/>
+                                            <span className="news-date-badge">{a.date}</span>
+                                        </div>
+                                        <div className="news-body">
+                                            <h4>{a.title}</h4>
+                                            <p>{a.desc}</p>
+                                            <span className="news-read">Read More <Arrow/></span>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </section>
 
-                    <section className="cta-banner">
-                        <img src={IMG.cta} alt=""/>
-                        <div className="container cta-inner reveal">
-                            <span className="section-tag" style={{color:'var(--gold)'}}>Join Our Team</span>
-                            <h2>Explore Opportunities With Us</h2>
-                            <p>We offer you a world of potential. Our people are entrepreneurial and innovative, going beyond today's problems to find tomorrow's solutions.</p>
-                            <a className="btn btn-primary" onClick={() => go('career')}>Discover Now <Arrow/></a>
+                    <section className="join-section">
+                        <div className="join-bg"><img src={IMG.team} alt="Join Our Team" style={{objectPosition:'center bottom'}}/></div> 
+                        {/* Using team image as placeholder for the blue hallway scene */}
+                        <div className="join-overlay"/>
+                        
+                        <div className="join-content-top reveal">
+                            <span className="join-tag">JOIN OUR TEAM</span>
+                            <h2 className="join-title">Explore Opportunities With Us</h2>
+                        </div>
+
+                        <div className="join-content-bottom reveal">
+                            <p className="join-desc">We offer you a world of potential. Our people are entrepreneurial and innovative, going beyond today's problems to find tomorrow's solutions.</p>
+                            <button className="btn-discover-join" onClick={() => go('career')}>Discover Now</button>
                         </div>
                     </section>
                 </div>
@@ -1085,20 +1681,20 @@
         function Footer({ go }) {
             const nav = id => { go(id); window.scrollTo({top:0, behavior:'smooth'}); };
             return (
-                <footer className="footer">
+                <footer className="footer-new">
                     <div className="container">
                         <div className="footer-grid">
                             <div className="footer-brand">
-                                <span className="nav-logo" style={{color:'var(--white)', cursor:'pointer'}} onClick={() => nav('home')}>KATIMAS<span>.</span></span>
+                                <h2>KATIMAS<span>.</span></h2>
                                 <p>Empowering Communities, Transforming Lives. A diversified Malaysian enterprise since 1996.</p>
-                                <div style={{marginTop:'1.25rem'}}>
-                                    <a href="https://www.facebook.com/profile.php?id=100083074160155" target="_blank" rel="noopener" className="footer-social">
-                                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                                <div className="footer-socials">
+                                    <a href="https://www.facebook.com/profile.php?id=100083074160155" target="_blank" rel="noopener">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                                     </a>
                                 </div>
                             </div>
-                            <div>
-                                <h5>Navigation</h5>
+                            <div className="footer-col footer-links">
+                                <h4>Navigation</h4>
                                 <ul>
                                     <li><a onClick={() => nav('home')}>Home</a></li>
                                     <li><a onClick={() => nav('about')}>About</a></li>
@@ -1109,32 +1705,32 @@
                                     <li><a onClick={() => nav('contact')}>Contact Us</a></li>
                                 </ul>
                             </div>
-                            <div>
-                                <h5>Legal</h5>
+                            <div className="footer-col footer-links">
+                                <h4>Legal</h4>
                                 <ul>
                                     <li><a href="#">Privacy Notice</a></li>
                                     <li><a href="#">Disclaimer Notice</a></li>
                                 </ul>
                             </div>
-                            <div>
-                                <h5>Contact</h5>
-                                <div className="footer-ci">
-                                    <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                                    <span>First Floor, Lot 33, Block B2 Saradise, 93350 Kuching, Sarawak, Malaysia</span>
+                            <div className="footer-col">
+                                <h4>Contact</h4>
+                                <div className="footer-contact-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                    <span>First Floor, Lot 33, Block B2 Saradise,<br/>93350 Kuching, Sarawak, Malaysia</span>
                                 </div>
-                                <div className="footer-ci">
-                                    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                <div className="footer-contact-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                     <span>+6082-555 770</span>
                                 </div>
-                                <div className="footer-ci">
-                                    <svg viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                <div className="footer-contact-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                                     <span>support@katimas.com.my</span>
                                 </div>
                             </div>
                         </div>
-                        <div className="footer-bottom">
+                        <div className="footer-btm">
                             <p>© Copyright 2025 Katimas Sdn. Bhd. [Registration No. 199601005298 (377644-W)]. All Rights Reserved.</p>
-                            <div style={{display:'flex', gap:'1.25rem'}}>
+                            <div className="footer-btm-links">
                                 <a href="#">Privacy Notice</a>
                                 <a href="#">Disclaimer</a>
                             </div>
